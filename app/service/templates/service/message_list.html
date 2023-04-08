@@ -1,0 +1,34 @@
+{% extends 'service/base.html' %}
+{% block content %}
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-primery border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Service</h5>
+    <nav class="ms-5">
+        <a class="p-2 btn btn-warning" href="{% url 'service:create_message' %}">Добавить письмо</a>
+    </nav>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="table-light" style="text-align: center">
+
+        <th scope="col">тема письма</th>
+        <th scope="col">тело письма</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td class="table-light" style="text-align: center">{{object.topic_message}}</td>
+            <td class="table-light" style="text-align: center">{{object.letter}}</td>
+            <td class="table-light" style="text-align: center">
+                <a class="btn btn-warning" href="{% url 'service:detail_message' object.pk %}">Просмотр</a>
+            </td>
+        </tr>
+        {% endfor%}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

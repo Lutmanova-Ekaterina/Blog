@@ -1,0 +1,12 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+<p>
+    И снова поздравляем! Теперь можно пользоваться сервисом
+</p>
+<a href="{% url 'users:login' %}" class="btn btn-link">
+    На главную
+</a>
+
+{% endblock %}

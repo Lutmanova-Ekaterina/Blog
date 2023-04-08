@@ -1,0 +1,40 @@
+{% extends 'service/base.html' %}
+{% block content %}
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-primery border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Service</h5>
+    <nav class="ms-5">
+        <h6 class="my-0 mr-md-auto font-weight-normal">Меню менеджера</h6>
+    </nav>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="table-light" style="text-align: center">
+        <th scope="col">контактный email</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Статус</th>
+        <th scope="col"></th>
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td class="table-light" style="text-align: center">{{object.email}}</td>
+            <td class="table-light" style="text-align: center">{{object.first_name}}</td>
+            <td class="table-light" style="text-align: center">{{object.last_name}}</td>
+            <td class="table-light" style="text-align: center">{{object.is_active}}</td>
+            <td class="table-light" style="text-align: center">
+                {% if perms.users.change_status %}
+                {% if object.is_active %}
+                <a class="p-2 btn btn-info" href="{% url 'users:user_change' object.pk %}">Деактивировать клиента</a>
+                {% else %}
+                <a class="p-2 btn btn-info" href="{% url 'users:user_change' object.pk %}">Активировать клиента</a>
+                {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor%}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

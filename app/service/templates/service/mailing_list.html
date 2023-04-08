@@ -1,0 +1,50 @@
+{% extends 'service/base.html' %}
+{% block content %}
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-primery border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Service</h5>
+    <nav class="ms-5">
+        <a class="p-2 btn btn-warning" href="{% url 'service:create_mail' %}">Добавить рассылку</a>
+        <a class="btn btn-outline-dark" href="{% url 'service:status' %}">Отправить всем сообщения сейчас</a>
+    </nav>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="table-light" style="text-align: center">
+        <th scope="col">кому</th>
+        <th scope="col">начать</th>
+        <th scope="col">закончить</th>
+        <th scope="col">время рассылки</th>
+        <th scope="col">периодичность:</th>
+        <th scope="col">статус рассылки</th>
+        <th scope="col">тема письма</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td class="table-light" style="text-align: center">{{object.add_customer.email}}</td>
+            <td class="table-light" style="text-align: center">{{object.first_date}}</td>
+            <td class="table-light" style="text-align: center">{{object.last_date}}</td>
+            <td class="table-light" style="text-align: center">{{object.time_mailing}}</td>
+            <td class="table-light" style="text-align: center">{{object.change_time}}</td>
+            <td class="table-light" style="text-align: center">{{object.state_mail}}</td>
+            <td class="table-light" style="text-align: center">{{object.add_message.topic_message}}</td>
+            <td class="table-light" style="text-align: center">
+                <a class="btn btn-warning" href="{% url 'service:detail_mail' object.pk %}">Просмотр</a>
+            </td>
+            {% if perms.service.turn_off %}
+            <td class="table-light" style="text-align: center">
+                <a class="btn btn-info" href="{% url 'service:deactivate' object.pk %}">Deactivate</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor%}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+

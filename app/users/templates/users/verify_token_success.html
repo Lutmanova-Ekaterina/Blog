@@ -1,0 +1,11 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+<p>
+    Ура! Все получилось!
+</p>
+<a href="{% url 'users:login' %}" class="btn btn-link">
+    На главную
+</a> или
+{% endblock %}

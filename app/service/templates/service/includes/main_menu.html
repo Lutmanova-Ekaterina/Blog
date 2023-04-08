@@ -1,0 +1,20 @@
+<div class="b-example-divider"></div>
+<header class="p-3 text-bg-light">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <a href="{% url 'service:service' %}" class="nav-link px-2 link-secondary">Клиенты</a>
+                <li><a href="{% url 'service:mail' %}" class="nav-link px-2 link-secondary">Рассылки</a></li>
+                <li><a href="{% url 'service:message' %}" class="nav-link px-2 link-secondary">Сообщения</a></li>
+                <li><a href="{% url 'service:statistic' %}" class="nav-link px-2 link-secondary">Статистика</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+

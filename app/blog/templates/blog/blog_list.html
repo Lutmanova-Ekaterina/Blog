@@ -1,0 +1,36 @@
+{% extends 'service/base.html' %}
+
+{% block content %}
+<h2 class="display-6 text-center mb-4">Наш блог</h2>
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-12">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-dark-emphasis">Service блог</strong>
+                <h3 class="mb-0">{{ object.title }}</h3>
+                <div class="mb-1 text-muted">{{ object.date|date:"d M" }}</div>
+                <p class="card-text mb-auto">
+                    {{ object.text|slice:150 }}...
+                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="{% url 'blog:read' object.pk %}" class="btn btn-link text-dark-emphasis">Continue
+                            reading</a>
+                    </div>
+                    <div class="col-6">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-auto d-none d-lg-block">
+
+                <rect width="100%" height="100%" fill="#55595c"></rect>
+                <img src="/media/{{ object.image }}" alt="" border=3 height=250 width=450>
+                </svg>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

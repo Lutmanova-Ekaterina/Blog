@@ -1,0 +1,17 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+<p>
+    Поражены вашей неудачей :(
+</p>
+<a href="{% url 'users:login' %}" class="btn btn-link">
+    На главную
+</a> или
+<a href="{% url 'users:register' %}" class="btn btn-link">
+    Попробовать еще раз
+</a>
+ну или
+<a href="mailto:support@service.com">Напишите в саппорт</a>
+
+{% endblock %}

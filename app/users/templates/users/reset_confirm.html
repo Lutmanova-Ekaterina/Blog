@@ -1,0 +1,10 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Введите новый пароль</h1>
+    {{ form.as_p }}
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Изменить пароль</button>
+</form>
+{% endblock %}

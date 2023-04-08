@@ -1,0 +1,30 @@
+{% extends 'service/base.html' %}
+{% block content %}
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-primery border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Service</h5>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="table-light" style="text-align: center">
+        <th scope="col"></th>
+        <th scope="col">Дата и время попытки</th>
+        <th scope="col">Cтатус попытки</th>
+        <th scope="col">Ответ почтового сервера</th>
+
+
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td class="table-light" style="text-align: center">{{object.id}}</td>
+            <td class="table-light" style="text-align: center">{{object.date}}</td>
+            <td class="table-light" style="text-align: center">{{object.status}}</td>
+            <td class="table-light" style="text-align: center">{{object.answer}}</td>
+
+        </tr>
+        {% endfor%}
+
+        </tbody>
+    </table>
+</div>
+{% endblock%}

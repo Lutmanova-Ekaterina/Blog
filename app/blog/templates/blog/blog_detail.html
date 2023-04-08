@@ -1,0 +1,30 @@
+{% extends 'service/base.html' %}
+
+{% block content %}
+<h2 class="display-6 text-center mb-4">{{ object.title }}</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <div class="row">
+                    <div class="col-6">
+                    </div>
+                </div>
+                <div class="mb-1 text-muted">{{ object.date|date:"d M" }}</div>
+                <p class="card-text mb-auto">
+                    {{ object.text }}
+                </p>
+
+            </div>
+
+            <div class="col-auto d-none d-lg-block">
+                <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
+                     role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                     focusable="false"><title>Placeholder</title>
+                    <img src="/media/{{ object.image }}" alt="" border=3 height=250 width=450></img>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

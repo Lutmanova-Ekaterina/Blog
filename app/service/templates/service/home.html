@@ -1,0 +1,47 @@
+{% extends 'service/base.html' %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col-12">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Наша статистика</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Всего рассылок : {{count_all_mail}}</li>
+                    <li>Активных рассылок всего : {{count_active_mail}}</li>
+                    <li>Количество уникальных клиентов для рассылок : {{customer}}</li>
+                </ul>
+                <a class="w-100 me-3 py-2 text-dark text-decoration-none btn btn-outline-warning"
+                   href="{% url 'service:service' %}">Перейти в приложение</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="display-6 text-center mb-4">Последние статьи</h2>
+<div class="row">
+    {% for item in blog %}
+    <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-dark-emphasis">{{ item.title }}</strong>
+                <h3 class="mb-0">{{ item.title }}</h3>
+                <div class="mb-1 text-muted">{{ item.date|date:"d M" }}</div>
+                <p class="card-text mb-auto">{{ item.text|slice:150 }}...</p>
+                <a href="{% url 'blog:read' item.pk %}" class="stretched-link text-dark-emphasis">Continue reading</a>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+                <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
+                     role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                     focusable="false"><title>Placeholder</title>
+                    <img src="/media/{{ item.image }}" alt="" border=3 height=250 width=450></img>
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

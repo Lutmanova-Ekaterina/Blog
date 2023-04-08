@@ -1,0 +1,26 @@
+{% extends 'service/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="card text-center" style="width: 30rem;">
+        <div class="card-body">
+        </div>
+        <div class="photo">
+            <img src="/static/mailing.png" alt="" border=5 height=200 width=300>
+        </div>
+        <div class="description">
+            <h2> Отправить на почту : {{object.add_customer.email}}</h2>
+            <h4> Начиная с даты : {{object.first_date}}</h4>
+            <h4> Начиная со времени : {{object.time_mailing}}</h4>
+            <h4> Заканчивая до : {{object.last_date}}</h4>
+            <h1> Периодичность : {{object.change_time}} </h1>
+            <h1> Статус отправки : {{object.state_mail}} </h1>
+            <p> Тема письма : {{object.add_message.topic_message}}</p>
+            <p> Текст письма : {{object.add_message.letter}}</p>
+            <td>
+                <button><a class="btn btn-info" href="{% url 'service:update_mail' object.pk %}">Изменить</a></button>
+                <button><a class="btn btn-info" href="{% url 'service:delete_mail' object.pk %}">Удалить</a></button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
