@@ -19,8 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 # в алфавитном порядке
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('users.urls', namespace='users')),
+    path('admin/', admin.site.urls),
     path('blog/', include('blog.urls', namespace='blog')),
     path('service/', include('service.urls', namespace='service')),
 ]

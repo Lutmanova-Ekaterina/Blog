@@ -45,14 +45,15 @@ class MailingListView(ListView):
             return queryset
 
         return queryset.filter(user_create=self.request.user)
+
+
 class UserFilterMixin:
     def get_queryset(self):
         return self.model.objects.filter(user_create=self.request.user)
 
+
 class MessageListView(ListView, UserFilterMixin):
     model = Message
-
-
 
 
 class CustomerCreateView(CreateView):
@@ -99,80 +100,52 @@ class MessageCreateView(CreateView):
         return super().form_valid(form)
 
 
-class CustomerUpdateView(UpdateView):
+class CustomerUpdateView(UpdateView, UserFilterMixin):
     model = Customers
     form_class = CustomerForm
     success_url = reverse_lazy('service:service')
 
-    def get_queryset(self):
-        return Customers.objects.filter(user_create=self.request.user)
 
-
-class MessageUpdateView(UpdateView):
+class MessageUpdateView(UpdateView, UserFilterMixin):
     model = Message
     form_class = MessageForm
     success_url = reverse_lazy('service:message')
 
-    def get_queryset(self):
-        return Message.objects.filter(user_create=self.request.user)
 
-
-class MailingUpdateView(UpdateView):
+class MailingUpdateView(UpdateView, UserFilterMixin):
     model = Mailing
     form_class = MailingForm
     success_url = reverse_lazy('service:mail')
 
-    def get_queryset(self):
-        return Mailing.objects.filter(user_create=self.request.user)
 
-
-class CustomerDeleteView(DeleteView):
+class CustomerDeleteView(DeleteView, UserFilterMixin):
     model = Customers
     success_url = reverse_lazy('service:service')
 
-    def get_queryset(self):
-        return Customers.objects.filter(user_create=self.request.user)
 
-
-class MessageDeleteView(DeleteView):
+class MessageDeleteView(DeleteView, UserFilterMixin):
     model = Message
     success_url = reverse_lazy('service:message')
 
-    def get_queryset(self):
-        return Message.objects.filter(user_create=self.request.user)
 
-
-class MailingDeleteView(DeleteView):
+class MailingDeleteView(DeleteView, UserFilterMixin):
     model = Mailing
     success_url = reverse_lazy('service:mail')
 
-    def get_queryset(self):
-        return Mailing.objects.filter(user_create=self.request.user)
 
-
-class CustomerDetailView(DetailView):
+class CustomerDetailView(DetailView, UserFilterMixin):
     model = Customers
 
-    def get_queryset(self):
-        return Customers.objects.filter(user_create=self.request.user)
 
-
-class MailingDetailView(DetailView):
+class MailingDetailView(DetailView, UserFilterMixin):
     model = Mailing
 
-    def get_queryset(self):
-        return Mailing.objects.filter(user_create=self.request.user)
 
-
-class MessageDetailView(DetailView):
+class MessageDetailView(DetailView, UserFilterMixin):
     model = Message
-
-    def get_queryset(self):
-        return Message.objects.filter(user_create=self.request.user)
 
 
 def mail_customer_confirm(request):
-
     id = request.user.id
     mail_customer(id)
     return redirect(reverse('service:mail'))
@@ -180,10 +153,8 @@ def mail_customer_confirm(request):
 
 @permission_required('service.turn_off')
 def turn_off_mailing(request, pk):
-
     current_mailing = get_object_or_404(Mailing, pk=pk)
     if current_mailing:
         current_mailing.state_mail = Mailing.STATUSE_DEACTIVATION
         current_mailing.save()
     return redirect(request.META.get('HTTP_REFERER'))
-

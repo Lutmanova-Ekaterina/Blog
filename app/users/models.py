@@ -23,12 +23,24 @@ class CustomUserManager(UserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.password = make_password(password)
-        user.save(using=self.db)
+        user.save(using=self._db)
         return user
 
 
+class Meta:
+    permissions = [
+        (
+            'change_status',
+            'Can change is_staff'
+        )
+    ]
+    unique_together = (
+        ('email', 'phone'),
+    )
+
+
 class User(AbstractUser):
-    objects = CustomUserManager() #менеджер моделей
+    objects = CustomUserManager()  # менеджер моделей
 
     username = None
     # user_create_id = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='пользователь', on_delete=models.CASCADE,
@@ -43,15 +55,3 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-
-    class Meta:
-        permissions = [
-            (
-                'change_status',
-                'Can change is_staff'
-            )
-        ]
-        unique_together = (
-            ('email', 'phone'),
-        )
-

@@ -13,6 +13,7 @@ from users.models import User
 from users.service import set_verify_token_and_send_mail, generate_password_and_send_mail
 
 
+# template, обычные функции и API
 class UserEditProfileView(UpdateView):
     model = User
     template_name = 'users/simple_reset.html'
