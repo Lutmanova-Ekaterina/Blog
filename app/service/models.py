@@ -6,7 +6,6 @@ NULLABLE = {'blank': True, 'null': True}
 
 
 class Customers(models.Model):
-
     user_create = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='пользователь',
                                     **NULLABLE)
     email = models.CharField(max_length=150, verbose_name='контактный email')
@@ -16,9 +15,14 @@ class Customers(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        permissions = [
+            ('turn_off',
+             'Can turn off mailing')
+        ]
+
 
 class Mailing(models.Model):
-
     objects = None
     PERIOD_ONE_DAY = 'once_day'
     PERIOD_ONE_WEEK = 'once_week'
@@ -50,15 +54,8 @@ class Mailing(models.Model):
     first_date = models.DateField(default=date.today, verbose_name='начальная_дата', )
     last_date = models.DateField(default=date.today, verbose_name='конечная_дата', )
 
-    class Meta:
-        permissions = [
-            ('turn_off',
-             'Can turn off mailing')
-        ]
-
 
 class Message(models.Model):
-
     user_create = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='пользователь', on_delete=models.CASCADE,
                                     **NULLABLE)
     topic_message = models.CharField(max_length=250, verbose_name='тема письма', **NULLABLE)
@@ -69,9 +66,6 @@ class Message(models.Model):
 
 
 class TryMail(models.Model):
-
     date = models.DateTimeField(auto_now_add=True, verbose_name='дата и время последней попытки')
     status = models.CharField(max_length=15, verbose_name='статус попытки')
     answer = models.CharField(max_length=150, verbose_name='ответ почтового сервера', **NULLABLE)
-
-

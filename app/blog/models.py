@@ -4,6 +4,11 @@ from django.db import models
 NULLABLE = {'blank': True, 'null': True}
 
 
+class Meta:
+    verbose_name = 'статья'
+    verbose_name_plural = 'статьи'
+
+
 class Blog(models.Model):
 
     user_create = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE)
@@ -15,9 +20,5 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
-
-    class Meta:
-        verbose_name = 'статья'
-        verbose_name_plural = 'статьи'
 
 

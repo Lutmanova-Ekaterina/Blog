@@ -1,10 +1,7 @@
 from django.urls import path
 
 from service.apps import ServiceConfig
-from service.views import CustomerListView, CustomerCreateView, MailingListView, MessageListView, MailingCreateView, \
-    MessageCreateView, CustomerUpdateView, MessageUpdateView, MailingUpdateView, CustomerDeleteView, MessageDeleteView, \
-    MailingDeleteView, CustomerDetailView, MailingDetailView, MessageDetailView, statistic, \
-    mail_customer_confirm, turn_off_mailing, HomePageView
+from service.views import *
 
 app_name = ServiceConfig.name
 
